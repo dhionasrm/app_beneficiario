@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'routes/app_routes.dart';
+import 'screens/carteirinha/carteirinha_detail_screen.dart';
+import 'screens/carteirinha/carteirinha_list_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/menu/menu_screen.dart';
 import 'screens/splash/splash_screen.dart';
@@ -40,6 +42,9 @@ class UnipoaApp extends StatelessWidget {
         AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.login: (context) => const LoginScreen(),
         AppRoutes.menu: (context) => const MenuScreen(),
+        AppRoutes.carteirinhaList: (context) => const CarteirinhaListScreen(),
+        AppRoutes.carteirinhaDetail: (context) =>
+            const CarteirinhaDetailScreen(),
       },
     );
   }

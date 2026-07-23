@@ -38,6 +38,9 @@ dependencies:
   # Persists lightweight local state (remember login, onboarding flags).
   shared_preferences: ^2.5.3
 
+  # Renders the carteirinha front/back SVG artwork.
+  flutter_svg: ^2.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -68,6 +71,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/images/carteirinha/
     - assets/icon/
 
   # Georama is a variable font: a single file covers weights 100-900 and

@@ -4,20 +4,24 @@ import '../../routes/app_routes.dart';
 import '../../services/auth_service.dart';
 
 class _MenuAction {
-  const _MenuAction(this.icon, this.label, this.description);
+  const _MenuAction(this.icon, this.label, this.description, {this.route});
 
   final IconData icon;
   final String label;
   final String description;
+  final String? route;
 }
 
 const _menuActions = [
-  _MenuAction(Icons.badge_outlined, 'Carteirinha Digital',
-      'Acesse sua carteirinha sempre que precisar'),
+  _MenuAction(Icons.badge_outlined, 'Carteirinha Virtual',
+      'Acesse sua carteirinha sempre que precisar',
+      route: AppRoutes.carteirinhaList),
   _MenuAction(Icons.map_outlined, 'Rede Credenciada',
       'Encontre dentistas e clínicas parceiras'),
   _MenuAction(Icons.calendar_month_outlined, 'Agendamentos',
       'Marque e acompanhe suas consultas'),
+  _MenuAction(Icons.event_available_outlined, 'Agendas Disponíveis',
+      'Busque prestadores com horários livres perto de você'),
   _MenuAction(Icons.description_outlined, 'Guias e Documentos',
       'Consulte guias, laudos e comprovantes'),
   _MenuAction(Icons.receipt_long_outlined, 'Financeiro',
@@ -61,6 +65,11 @@ class MenuScreen extends StatelessWidget {
   }
 
   void _openAction(BuildContext context, _MenuAction action) {
+    if (action.route != null) {
+      Navigator.of(context).pushNamed(action.route!);
+      return;
+    }
+
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(content: Text('${action.label}: funcionalidade em desenvolvimento.')),
     );
