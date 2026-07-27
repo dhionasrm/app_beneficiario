@@ -5,6 +5,7 @@ import '../../routes/app_routes.dart';
 import '../../services/auth_service.dart';
 import '../../widgets/app_text_field.dart';
 import '../../widgets/brand_mark.dart';
+import '../../widgets/error_banner.dart';
 import '../../widgets/primary_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -60,23 +61,12 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  void _showForgotPasswordHelp() {
-    showDialog<void>(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text('Recuperar acesso'),
-        content: const Text(
-          'Para redefinir sua senha, entre em contato com a Central de '
-          'Atendimento da Unipoa informando o número da sua carteirinha.',
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Entendi'),
-          ),
-        ],
-      ),
-    );
+  void _goToForgotPassword() {
+    Navigator.of(context).pushNamed(AppRoutes.forgotPassword);
+  }
+
+  void _goToFirstAccess() {
+    Navigator.of(context).pushNamed(AppRoutes.firstAccess);
   }
 
   @override
@@ -134,7 +124,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             if (_errorMessage != null) ...[
                               Semantics(
                                 liveRegion: true,
-                                child: _ErrorBanner(message: _errorMessage!),
+                                child: ErrorBanner(message: _errorMessage!),
                               ),
                               const SizedBox(height: 16),
                             ],
@@ -199,7 +189,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   ),
                                 ),
                                 TextButton(
-                                  onPressed: _showForgotPasswordHelp,
+                                  onPressed: _goToForgotPassword,
                                   child: const Text('Esqueci minha senha'),
                                 ),
                               ],
@@ -209,6 +199,13 @@ class _LoginScreenState extends State<LoginScreen> {
                               label: 'Entrar',
                               isLoading: _isSubmitting,
                               onPressed: _submit,
+                            ),
+                            const SizedBox(height: 8),
+                            Center(
+                              child: TextButton(
+                                onPressed: _goToFirstAccess,
+                                child: const Text('Primeiro acesso'),
+                              ),
                             ),
                           ],
                         ),
@@ -223,37 +220,6 @@ class _LoginScreenState extends State<LoginScreen> {
             );
           },
         ),
-      ),
-    );
-  }
-}
-
-class _ErrorBanner extends StatelessWidget {
-  const _ErrorBanner({required this.message});
-
-  final String message;
-
-  @override
-  Widget build(BuildContext context) {
-    final colorScheme = Theme.of(context).colorScheme;
-    return Container(
-      padding: const EdgeInsets.all(12),
-      decoration: BoxDecoration(
-        color: colorScheme.errorContainer,
-        borderRadius: BorderRadius.circular(12),
-      ),
-      child: Row(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Icon(Icons.error_outline, color: colorScheme.onErrorContainer),
-          const SizedBox(width: 10),
-          Expanded(
-            child: Text(
-              message,
-              style: TextStyle(color: colorScheme.onErrorContainer),
-            ),
-          ),
-        ],
       ),
     );
   }

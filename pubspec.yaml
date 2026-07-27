@@ -41,6 +41,12 @@ dependencies:
   # Renders the carteirinha front/back SVG artwork.
   flutter_svg: ^2.2.1
 
+  # HTTP client used to consult the Uniodonto beneficiary API.
+  http: ^1.6.0
+
+  # Resolves the app's local storage directory for the first-access JSON file.
+  path_provider: ^2.1.5
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
