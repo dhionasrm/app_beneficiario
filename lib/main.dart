@@ -3,8 +3,11 @@ import 'package:flutter/material.dart';
 import 'routes/app_routes.dart';
 import 'screens/carteirinha/carteirinha_detail_screen.dart';
 import 'screens/carteirinha/carteirinha_list_screen.dart';
+import 'screens/login/first_access_screen.dart';
+import 'screens/login/forgot_password_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/menu/menu_screen.dart';
+import 'screens/rede_credenciada/rede_credenciada_screen.dart';
 import 'screens/splash/splash_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -41,10 +44,13 @@ class UnipoaApp extends StatelessWidget {
       routes: {
         AppRoutes.splash: (context) => const SplashScreen(),
         AppRoutes.login: (context) => const LoginScreen(),
+        AppRoutes.forgotPassword: (context) => const ForgotPasswordScreen(),
+        AppRoutes.firstAccess: (context) => const FirstAccessScreen(),
         AppRoutes.menu: (context) => const MenuScreen(),
         AppRoutes.carteirinhaList: (context) => const CarteirinhaListScreen(),
         AppRoutes.carteirinhaDetail: (context) =>
             const CarteirinhaDetailScreen(),
+        AppRoutes.redeCredenciada: (context) => const RedeCredenciadaScreen(),
       },
     );
   }
