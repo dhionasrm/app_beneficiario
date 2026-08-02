@@ -8,4 +8,5 @@ class AppRoutes {
   static const String menu = '/menu';
   static const String carteirinhaList = '/carteirinha';
   static const String carteirinhaDetail = '/carteirinha/detalhe';
+  static const String redeCredenciada = '/rede-credenciada';
 }

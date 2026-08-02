@@ -7,6 +7,7 @@ import 'screens/login/first_access_screen.dart';
 import 'screens/login/forgot_password_screen.dart';
 import 'screens/login/login_screen.dart';
 import 'screens/menu/menu_screen.dart';
+import 'screens/rede_credenciada/rede_credenciada_screen.dart';
 import 'screens/splash/splash_screen.dart';
 import 'theme/app_theme.dart';
 
@@ -49,6 +50,7 @@ class UnipoaApp extends StatelessWidget {
         AppRoutes.carteirinhaList: (context) => const CarteirinhaListScreen(),
         AppRoutes.carteirinhaDetail: (context) =>
             const CarteirinhaDetailScreen(),
+        AppRoutes.redeCredenciada: (context) => const RedeCredenciadaScreen(),
       },
     );
   }

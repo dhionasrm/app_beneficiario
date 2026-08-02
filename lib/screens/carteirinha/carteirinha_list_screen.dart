@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import '../../models/beneficiario.dart';
 import '../../routes/app_routes.dart';
 import '../../services/carteirinha_service.dart';
+import '../../utils/cpf_mask.dart';
 
 class CarteirinhaListScreen extends StatefulWidget {
   const CarteirinhaListScreen({super.key});
@@ -106,7 +107,8 @@ class _BeneficiarioRow extends StatelessWidget {
     return Semantics(
       button: true,
       label:
-          '${beneficiario.nome}, CPF ${beneficiario.cpf}, plano ${beneficiario.plano}',
+          '${beneficiario.nome}, CPF oculto terminado em ${beneficiario.cpf.substring(beneficiario.cpf.length - 2)}, '
+          'plano ${beneficiario.plano}. Toque para ver os detalhes.',
       child: InkWell(
         onTap: onTap,
         child: Padding(
@@ -126,7 +128,7 @@ class _BeneficiarioRow extends StatelessWidget {
               Expanded(
                 flex: 2,
                 child: Text(
-                  beneficiario.cpf,
+                  maskCpf(beneficiario.cpf),
                   style: theme.textTheme.bodyMedium,
                   maxLines: 1,
                   overflow: TextOverflow.ellipsis,

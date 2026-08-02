@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../models/beneficiario.dart';
+import '../../utils/cpf_mask.dart';
 import '../../widgets/primary_button.dart';
 
 class CarteirinhaDetailScreen extends StatelessWidget {
@@ -63,7 +64,7 @@ class CarteirinhaDetailScreen extends StatelessWidget {
 
 /// Card art (front/back) rendered from the official Uniodonto carteirinha
 /// SVGs, with the beneficiário's data overlaid on the front face.
-class _CartFace extends StatelessWidget {
+class _CartFace extends StatefulWidget {
   const _CartFace({
     required this.asset,
     required this.label,
@@ -77,9 +78,20 @@ class _CartFace extends StatelessWidget {
   final bool showDados;
 
   @override
+  State<_CartFace> createState() => _CartFaceState();
+}
+
+class _CartFaceState extends State<_CartFace> {
+  bool _cpfRevealed = false;
+
+  @override
   Widget build(BuildContext context) {
+    final beneficiario = widget.beneficiario;
+    final displayCpf =
+        _cpfRevealed ? beneficiario.cpf : maskCpf(beneficiario.cpf);
+
     return Semantics(
-      label: '$label da carteirinha de ${beneficiario.nome}',
+      label: '${widget.label} da carteirinha de ${beneficiario.nome}',
       image: true,
       child: AspectRatio(
         aspectRatio: 270.933 / 169.333,
@@ -88,8 +100,8 @@ class _CartFace extends StatelessWidget {
           child: Stack(
             fit: StackFit.expand,
             children: [
-              SvgPicture.asset(asset, fit: BoxFit.cover),
-              if (showDados)
+              SvgPicture.asset(widget.asset, fit: BoxFit.cover),
+              if (widget.showDados)
                 LayoutBuilder(
                   builder: (context, constraints) {
                     return Padding(
@@ -112,9 +124,34 @@ class _CartFace extends StatelessWidget {
                             ),
                           ),
                           const SizedBox(height: 4),
-                          Text(
-                            'CPF ${beneficiario.cpf}',
-                            style: const TextStyle(color: Colors.white70),
+                          Semantics(
+                            button: true,
+                            label: _cpfRevealed
+                                ? 'CPF $displayCpf, toque para ocultar'
+                                : 'CPF oculto, toque para exibir',
+                            child: InkWell(
+                              onTap: () =>
+                                  setState(() => _cpfRevealed = !_cpfRevealed),
+                              child: Row(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  Text(
+                                    'CPF $displayCpf',
+                                    style: const TextStyle(
+                                      color: Colors.white70,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 6),
+                                  Icon(
+                                    _cpfRevealed
+                                        ? Icons.visibility_off_outlined
+                                        : Icons.visibility_outlined,
+                                    size: 16,
+                                    color: Colors.white70,
+                                  ),
+                                ],
+                              ),
+                            ),
                           ),
                           const SizedBox(height: 2),
                           Text(

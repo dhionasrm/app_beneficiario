@@ -22,6 +22,8 @@ class AppTextField extends StatefulWidget {
     this.inputFormatters,
     this.readOnly = false,
     this.onTap,
+    this.enabled = true,
+    this.onChanged,
   });
 
   final String label;
@@ -38,6 +40,8 @@ class AppTextField extends StatefulWidget {
   final List<TextInputFormatter>? inputFormatters;
   final bool readOnly;
   final VoidCallback? onTap;
+  final bool enabled;
+  final void Function(String)? onChanged;
 
   @override
   State<AppTextField> createState() => _AppTextFieldState();
@@ -60,6 +64,8 @@ class _AppTextFieldState extends State<AppTextField> {
       inputFormatters: widget.inputFormatters,
       readOnly: widget.readOnly,
       onTap: widget.onTap,
+      enabled: widget.enabled,
+      onChanged: widget.onChanged,
       autovalidateMode: AutovalidateMode.onUserInteraction,
       decoration: InputDecoration(
         labelText: widget.label,

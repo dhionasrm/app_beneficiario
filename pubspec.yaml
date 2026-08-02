@@ -46,6 +46,8 @@ dependencies:
 
   # Resolves the app's local storage directory for the first-access JSON file.
   path_provider: ^2.1.5
+  pdf: ^3.13.0
+  printing: ^5.15.0
 
 dev_dependencies:
   flutter_test:
